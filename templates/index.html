@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Search | Discover Beauty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Modern background with overlay */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
+                url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover no-repeat fixed;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            transition: background-image 1s ease;
+        }
+
+        /* Container styling */
+        .search-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        input[type="text"] {
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        button {
+            background: rgba(255,255,255,0.3);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        button:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1 class="title">Visual Search Explorer</h1>
+        <form class="search-form" action="/search" method="get">
+            <input type="text" name="query" placeholder="Search for beautiful images..." required>
+            <button type="submit">Discover</button>
+        </form>
+    </div>
+
+    <script>
+        // Dynamic background rotation
+        const backgrounds = [
+            "url('https://images.unsplash.com/photo-1506744038136-46273834b3fb')",
+            "url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05')",
+            "url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d')"
+        ];
+        
+        let current = 0;
+        function changeBackground() {
+            current = (current + 1) % backgrounds.length;
+            document.body.style.backgroundImage = 
+                `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), ${backgrounds[current]}`;
+        }
+        
+        // Start rotation after first image loads
+        const img = new Image();
+        img.src = backgrounds[0].match(/url\(['"]?([^'"]*)['"]?\)/)[1];
+        img.onload = () => setInterval(changeBackground, 8000);
+    </script>
+</body>
+</html>
