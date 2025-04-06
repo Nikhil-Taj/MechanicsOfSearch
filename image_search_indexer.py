@@ -1,12 +1,17 @@
 import re
 import nltk
+import os
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import json
 
-nltk.download('punkt')
-nltk.download('stopwords')
+# Ensure NLTK data is available
+nltk_data_dir = '/opt/render/project/src/nltk_data'
+if not os.path.exists(nltk_data_dir):
+    os.makedirs(nltk_data_dir)
+    nltk.download('punkt', download_dir=nltk_data_dir)
+nltk.data.path.append(nltk_data_dir)
 
 class SearchEngineIndexer:
     def __init__(self, data_path):

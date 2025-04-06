@@ -1,9 +1,12 @@
 import nltk
 import os
 
-# Configure NLTK data path
-nltk.data.path.append('/opt/render/project/src/nltk_data')
-
+# Set the NLTK data path to a persistent directory
+nltk_data_dir = '/opt/render/project/src/nltk_data'
+os.makedirs(nltk_data_dir, exist_ok=True)
+nltk.download('punkt', download_dir=nltk_data_dir)
+nltk.download('stopwords', download_dir=nltk_data_dir)  # if you use stopwords
+nltk.data.path.append(nltk_data_dir)
 from flask import Flask, render_template, request
 from image_search_indexer import SearchEngineIndexer
 
