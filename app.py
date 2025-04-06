@@ -1,3 +1,9 @@
+import nltk
+import os
+
+# Configure NLTK data path
+nltk.data.path.append('/opt/render/project/src/nltk_data')
+
 from flask import Flask, render_template, request
 from image_search_indexer import SearchEngineIndexer
 
